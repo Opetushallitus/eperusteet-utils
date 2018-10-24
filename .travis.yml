@@ -25,7 +25,7 @@ script:
 
 deploy:
   provider: script
-  script: mvn deploy -pl eperusteet-backend-utils . --settings ci-tools/common/maven-settings.xml
+  script: mvn deploy -pl . --settings ci-tools/common/maven-settings.xml
   skip_cleanup: true
   on:
     branch: master
