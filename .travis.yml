@@ -1,0 +1,31 @@
+sudo: required
+
+language: java
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+  - $HOME/.m2
+
+env:
+  global:
+    # ARTIFACTORY_USERNAME
+    - secure: "giYehwpYQl4ZhNQ3sHfnKLaiQ2owyqW3oTz5vZWLM4cyhK9/kN+xL9HBYCSiPahg1SoKHVynvtAMcTpNLiJ/B756PGDePx1AzjSnJpBds/3yzglcKh3HY+keGlTGW5tAHFVzmsaTiUVue7SwGIVi8jucSDnS9l2XEYE7qlzvxUH9sNSDYLWRL6T5cpZ6Rg/vXk+tpx22WvitYZWkEaud46bh71wEvyTQXH+P8cYtgtPVD+sFav3iFgX2qtef5laXxk3Zv+V4QTVY+kI7Tz0scGX7MnSV3Eji+VPgQfRsOLpRqcGwyJmJuKoiFBX08+rJKqj080UL2DyzFhtHXoRfBzYR0eI+5aOwN2zTJZMj88G8ATqg7Z+JKwXp8LfYjNtZhssbiZi+ZJsHMZTC+jcjMmlPG7hOVhYCs8oU6L//J/p6k8JghjTIZqpl9NbSMJL8klHnR95RZh1IJOw99UJgs/JVFj+Cs8gZhHAP1SaoHS9tE5pmfIuRTRB0qvr0r0/gN9rV5tgubUnt+mP08735q1frjxXyrrTNHSBLxdrI3I1SZD7DC28N1WPYftEVVAhDgYh0feDmCfsGTSwoPNCvoj67marpRRueyOckbD0XliB/YXFpdr52rOufPlUEfEFsmBB+5L7G8ThLnd3EnPufTeNCeXDB1PZD071hREIpQR4="
+    # ARTIFACTORY_PASSWORD
+    - secure: "PbtWQ1QmQo1qSo9q7Qf2RIxsndX+SUEZh461mvPnclY8otlDi7MkmKBGCnwydA6DI5URmJdhQBRDL/fh3T3h6S+h51cgq8KtdpOLZN8HtuAjUFC5DZxIU/knef+6DvKU49ZJ9/zc4CRLwbMirYdCjK7Ta/iFamsLzQ838AbfyshuJDyY7WkL/uAfFbFb3u+3+nDCBbXNAUs/ZVzIdEoR9TyMkmCIC58Qi27shf1K+yzKw70/dc/KPr9FTNzVkBTrjnhRffl3HWwhOQTwwPrGUnsZ5kOkw4dAJPP2Q19D/WkfqW1L0tAM+X5ChoMnYQbi4m+kZbIhTQLfYlnxVkQic0dXak4ZaEsjg0+wRCmcxybbntutCNpmISsE9v5tzoWSJPNaMuaUqd7s8HQdqcoXOTsQn1LHJO0i3soABLvj5CgL+MGzG35ECcm8I65YvAmLekRaAF6UTdLq/VYOvMUIoyqKYcb2avQoHEPhPMafKUubYLVdUup3UQsM2115BRHtojnn5N676uuB0KYbejvEQrWJilS9jG6zsIqRaMsdTz5TLpk7EXxqA9uIFasi2g9CINADi27KCeYYgqNWmc0n82YpVnNPVAD2Yl4CthNBLDUqDlgHauRgDebuXR3VtqfiXDuWakRBQIhENj+OlWeCROtlmaR1LxLXC9UBK9j5I40="
+
+install:
+  - git clone https://github.com/Opetushallitus/ci-tools.git
+  - source ci-tools/common/setup-tools.sh
+
+script:
+  - mvn clean package
+
+deploy:
+  provider: script
+  script: mvn deploy -pl eperusteet-backend-utils -DskipTests --settings ci-tools/common/maven-settings.xml
+  skip_cleanup: true
+  on:
+    branch: master
