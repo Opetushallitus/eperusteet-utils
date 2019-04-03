@@ -16,6 +16,7 @@
 
 package fi.vm.sade.eperusteet.utils.dto.tutkinnonrakenne;
 
+import fi.vm.sade.eperusteet.utils.dto.KoodiDto;
 import fi.vm.sade.eperusteet.utils.dto.util.LokalisoituTekstiDto;
 import lombok.Getter;
 import lombok.Setter;

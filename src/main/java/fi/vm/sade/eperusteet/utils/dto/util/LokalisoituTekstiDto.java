@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import fi.vm.sade.eperusteet.utils.domain.Kieli;
+import fi.vm.sade.eperusteet.utils.domain.LokalisoituTeksti;
 import fi.vm.sade.eperusteet.utils.domain.TekstiPalanen;
 import lombok.Getter;
 import org.springframework.util.ObjectUtils;
