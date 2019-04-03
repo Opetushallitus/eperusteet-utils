@@ -13,28 +13,23 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * European Union Public Licence for more details.
  */
-
-package fi.vm.sade.eperusteet.utils.dto.yl;
-
-import fi.vm.sade.eperusteet.utils.dto.Reference;
-import fi.vm.sade.eperusteet.utils.dto.KoodiDto;
-import fi.vm.sade.eperusteet.utils.dto.util.LokalisoituTekstiDto;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.Optional;
-import java.util.UUID;
+package fi.vm.sade.eperusteet.utils.domain.teksti;
 
 /**
- *
- * @author nkala
+ * @author mikkom
  */
-@Getter
-@Setter
-public class AIPEKurssiBaseDto implements AIPEHasId {
-    private Long id;
-    private UUID tunniste;
-    private Optional<LokalisoituTekstiDto> nimi;
-    private Reference oppiaine;
-    private KoodiDto koodi;
+public enum Omistussuhde {
+    OMA("oma"),
+    LAINATTU("lainattu");
+
+    private String omistussuhde;
+
+    private Omistussuhde(String omistussuhde) {
+        this.omistussuhde = omistussuhde;
+    }
+
+    @Override
+    public String toString() {
+        return omistussuhde;
+    }
 }
