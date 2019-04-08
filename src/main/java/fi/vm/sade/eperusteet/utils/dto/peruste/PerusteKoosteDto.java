@@ -17,7 +17,7 @@
 package fi.vm.sade.eperusteet.utils.dto.peruste;
 
 import fi.vm.sade.eperusteet.utils.domain.Kieli;
-import fi.vm.sade.eperusteet.utils.dto.KoodiDto;
+import fi.vm.sade.eperusteet.utils.dto.tutkinnonrakenne.KoodiDto;
 import fi.vm.sade.eperusteet.utils.dto.util.LokalisoituTekstiDto;
 import lombok.Getter;
 import lombok.Setter;

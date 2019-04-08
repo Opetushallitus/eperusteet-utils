@@ -18,7 +18,7 @@ package fi.vm.sade.eperusteet.utils.dto.tutkinnonosa;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import fi.vm.sade.eperusteet.utils.domain.Kieli;
-import fi.vm.sade.eperusteet.utils.dto.KoodiDto;
+import fi.vm.sade.eperusteet.utils.dto.tutkinnonrakenne.KoodiDto;
 import fi.vm.sade.eperusteet.utils.dto.util.LokalisoituTekstiDto;
 import lombok.Getter;
 import lombok.Setter;

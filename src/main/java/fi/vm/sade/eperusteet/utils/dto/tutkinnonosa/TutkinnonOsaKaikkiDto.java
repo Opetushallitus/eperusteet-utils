@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import fi.vm.sade.eperusteet.utils.domain.tutkinnonosa.TutkinnonOsaTyyppi;
 import fi.vm.sade.eperusteet.utils.dto.arviointi.ArviointiDto;
 import fi.vm.sade.eperusteet.utils.dto.peruste.PerusteenOsaDto;
-import fi.vm.sade.eperusteet.utils.dto.KoodiDto;
+import fi.vm.sade.eperusteet.utils.dto.tutkinnonrakenne.KoodiDto;
 import fi.vm.sade.eperusteet.utils.dto.util.LokalisoituTekstiDto;
 import lombok.Getter;
 import lombok.Setter;
