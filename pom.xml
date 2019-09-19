@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fi.vm.sade.eperusteet</groupId>
     <artifactId>eperusteet-backend-utils</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.6-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -36,6 +36,13 @@
         <hibernate.version>4.3.11.Final</hibernate.version>
         <jackson.version>2.9.9</jackson.version>
         <spring.version>4.3.25.RELEASE</spring.version>
+        <spring.security.version>4.2.4.RELEASE</spring.security.version>
+        <aspectj.version>1.8.9</aspectj.version>
+        <audit.logger.version>8.3.1-SNAPSHOT</audit.logger.version>
+        <javax.servet.version>3.0.1</javax.servet.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <sade.java-utils.version>0.2.0-SNAPSHOT</sade.java-utils.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
     </properties>
     <dependencies>
         <dependency>
@@ -63,6 +70,12 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernate.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
@@ -71,9 +84,76 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.3.25.RELEASE</version>
+            <version>${spring.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspectj.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>fi.vm.sade</groupId>
+            <artifactId>auditlogger</artifactId>
+            <version>${audit.logger.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>fi.vm.sade.java-utils</groupId>
+            <artifactId>java-http</artifactId>
+            <version>${sade.java-utils.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <repositories>
         <repository>
