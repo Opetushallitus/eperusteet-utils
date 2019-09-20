@@ -28,7 +28,7 @@ public class AuditLogger {
     @Autowired
     private CommonAuditer audit;
 
-    @Around("execution(* *(..)) && (@annotation(fi.vm.sade.eperusteet.ylops.resource.util.AuditLogged) || within(@org.springframework.web.bind.annotation.RestController *))")
+    @Around("execution(* *(..)) && within(@org.springframework.web.bind.annotation.RestController *))")
     public Object auditLog(ProceedingJoinPoint point) throws Throwable {
 
         Signature signature = point.getStaticPart().getSignature();
