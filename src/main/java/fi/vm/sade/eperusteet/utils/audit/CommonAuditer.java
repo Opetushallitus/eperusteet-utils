@@ -87,7 +87,7 @@ public class CommonAuditer {
             return request.getSession(false).getId();
         } catch(Exception e) {
             LOG.error("Couldn't log session for request {}", request);
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
@@ -96,7 +96,7 @@ public class CommonAuditer {
             return InetAddress.getByName(HttpServletRequestUtils.getRemoteAddress(request));
         } catch(Exception e) {
             LOG.error("Couldn't log InetAddress for log entry", e);
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
@@ -105,8 +105,6 @@ public class CommonAuditer {
             return new User(new Oid(userOid), ip, session, userAgent);
         } catch (GSSException e) {
             return new User(null, ip, session, userAgent);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
