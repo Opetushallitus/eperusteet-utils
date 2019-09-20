@@ -3,6 +3,7 @@ package fi.vm.sade.eperusteet.utils.audit;
 import fi.vm.sade.auditlog.Changes;
 import fi.vm.sade.eperusteet.utils.revision.RevisionMetaService;
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import static java.util.Arrays.asList;
 
 @Slf4j
 @Aspect
@@ -35,9 +38,8 @@ public class AuditLogger {
         if (signature instanceof MethodSignature) {
             MethodSignature method = (MethodSignature) signature;
             RequestMapping mapping = method.getMethod().getAnnotation(RequestMapping.class);
-            boolean requestMappingGet = mapping.method().length == 1 && mapping.method()[0].equals(RequestMethod.GET);
 
-            if (mapping != null && mapping.method() != null && mapping.method().length > 0 && !requestMappingGet) {
+            if (mapping != null && mapping.method() != null && mapping.method().length > 0 && !asList(mapping.method()).contains(RequestMethod.GET)) {
                 String[] parameterNames = method.getParameterNames();
                 Object[] parameters = point.getArgs();
                 Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
