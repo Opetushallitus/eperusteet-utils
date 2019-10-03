@@ -48,7 +48,6 @@ public class OphClientHelper {
         OphHttpClient client = restClientFactory.get(serviceUrl, true);
 
         try {
-
             OphHttpRequest.Builder builder = new OphHttpRequest.Builder(httpMethod, url);
             if(content != null) {
                 builder = builder.addHeader("Content-Type", "application/json;charset=UTF-8")
@@ -79,7 +78,7 @@ public class OphClientHelper {
                     })
                     .orElse(null);
         } catch (JsonProcessingException e) {
-            throw new OphClientException("lisays-epaonnistui");
+            throw new OphClientException("kutsu-epaonnistui", e);
         }
     }
 
