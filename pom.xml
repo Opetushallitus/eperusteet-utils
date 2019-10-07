@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fi.vm.sade.eperusteet</groupId>
     <artifactId>eperusteet-backend-utils</artifactId>
-    <version>2.1-SNAPSHOT</version>
+    <version>2.2-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -41,7 +41,7 @@
         <audit.logger.version>8.3.1-SNAPSHOT</audit.logger.version>
         <javax.servet.version>3.0.1</javax.servet.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <sade.java-utils.version>0.2.0-SNAPSHOT</sade.java-utils.version>
+        <sade.java-utils.version>0.5.0-SNAPSHOT</sade.java-utils.version>
         <commons-collections.version>3.2.2</commons-collections.version>
     </properties>
     <dependencies>

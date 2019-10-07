@@ -5,4 +5,6 @@ import fi.vm.sade.javautils.http.OphHttpClient;
 public interface RestClientFactory {
 
     OphHttpClient get(String service, boolean requireCas);
+
+    String getCallerId();
 }

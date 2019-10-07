@@ -1,11 +1,16 @@
 package fi.vm.sade.eperusteet.utils.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.vm.sade.javautils.http.OphHttpClient;
 import fi.vm.sade.javautils.http.OphHttpEntity;
 import fi.vm.sade.javautils.http.OphHttpRequest;
+import fi.vm.sade.javautils.http.exceptions.UnhandledHttpStatusCodeException;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -22,6 +27,8 @@ import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static javax.servlet.http.HttpServletResponse.SC_METHOD_NOT_ALLOWED;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 
 @Slf4j
 @Service
@@ -32,8 +39,19 @@ public class OphClientHelper {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    public <T> List<T> getList(String serviceUrl, String url, Class<T> clazz) {
+        String result = execute(serviceUrl, url, null, HttpGet.METHOD_NAME);
+        try {
+            return objectMapper.readValue(result, new TypeReference<List<T>>(){});
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            throw new OphClientException("parsinta-epaonnistui");
+        }
+    }
+
     public <T> T get(String serviceUrl, String url, Class<T> clazz) {
-        return execute(serviceUrl, url, null, clazz, HttpGet.METHOD_NAME);
+        String result = execute(serviceUrl, url, null, HttpGet.METHOD_NAME);
+        return parseResult(result, clazz);
     }
 
     public void post(String serviceUrl, String url) {
@@ -41,10 +59,15 @@ public class OphClientHelper {
     }
 
     public <T> T post(String serviceUrl, String url, Class<T> clazz) {
-        return execute(serviceUrl, url, null, clazz, HttpPost.METHOD_NAME);
+        return post(serviceUrl, url, null, clazz);
     }
 
-    public <T> T execute(String serviceUrl, String url, Object content, Class<T> clazz, String httpMethod) {
+    public <T> T post(String serviceUrl, String url, Object content, Class<T> clazz) {
+        String result = execute(serviceUrl, url, content, HttpPost.METHOD_NAME);
+        return parseResult(result, clazz);
+    }
+
+    private String execute(String serviceUrl, String url, Object content, String httpMethod) {
         OphHttpClient client = restClientFactory.get(serviceUrl, true);
 
         try {
@@ -59,27 +82,34 @@ public class OphClientHelper {
 
             OphHttpRequest request = builder.build();
 
-            return client.<T>execute(request)
-                    .handleErrorStatus(SC_UNAUTHORIZED, SC_FORBIDDEN, SC_METHOD_NOT_ALLOWED, SC_BAD_REQUEST, SC_INTERNAL_SERVER_ERROR)
+            return client.<String>execute(request)
+                    .handleErrorStatus(SC_NO_CONTENT)
                     .with(res -> {
-                        return Optional.empty();
+                        throw new UnhandledHttpStatusCodeException("kutsu-epaonnistui", SC_NO_CONTENT);
+                    })
+                    .handleErrorStatus(SC_NOT_FOUND)
+                    .with(res -> {
+                        throw new UnhandledHttpStatusCodeException("kutsu-epaonnistui", SC_NOT_FOUND);
                     })
                     .expectedStatus(SC_OK, SC_CREATED)
-                    .mapWith(text -> {
-                        try {
-                            if(StringUtils.isEmpty(text)) {
-                                return null;
-                            }
-                            return objectMapper.readValue(text, clazz);
-                        } catch (IOException e) {
-                            log.error(e.getMessage());
-                            throw new OphClientException("parsinta-epaonnistui");
-                        }
-                    })
+                    .mapWith(text -> text)
                     .orElse(null);
         } catch (JsonProcessingException e) {
             throw new OphClientException("kutsu-epaonnistui", e);
         }
+    }
+
+    private <T> T parseResult(String result, Class<T> clazz) {
+        try {
+            if(StringUtils.isEmpty(result)) {
+                return null;
+            }
+            return objectMapper.readValue(result, clazz);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            throw new OphClientException("parsinta-epaonnistui");
+        }
+
     }
 
 }
