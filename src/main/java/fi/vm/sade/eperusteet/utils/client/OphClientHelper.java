@@ -6,12 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.vm.sade.javautils.http.OphHttpClient;
 import fi.vm.sade.javautils.http.OphHttpEntity;
 import fi.vm.sade.javautils.http.OphHttpRequest;
-import fi.vm.sade.javautils.http.exceptions.UnhandledHttpStatusCodeException;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.methods.HttpGet;
@@ -20,15 +16,8 @@ import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_CREATED;
-import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
-import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
-import static javax.servlet.http.HttpServletResponse.SC_METHOD_NOT_ALLOWED;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
-import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
-import static org.apache.http.HttpStatus.SC_NOT_FOUND;
-import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 
 @Slf4j
 @Service
@@ -83,14 +72,6 @@ public class OphClientHelper {
             OphHttpRequest request = builder.build();
 
             return client.<String>execute(request)
-                    .handleErrorStatus(SC_NO_CONTENT)
-                    .with(res -> {
-                        throw new UnhandledHttpStatusCodeException("kutsu-epaonnistui", SC_NO_CONTENT);
-                    })
-                    .handleErrorStatus(SC_NOT_FOUND)
-                    .with(res -> {
-                        throw new UnhandledHttpStatusCodeException("kutsu-epaonnistui", SC_NOT_FOUND);
-                    })
                     .expectedStatus(SC_OK, SC_CREATED)
                     .mapWith(text -> text)
                     .orElse(null);
