@@ -30,12 +30,7 @@ public class OphClientHelper {
 
     public <T> List<T> getList(String serviceUrl, String url, Class<T> clazz) {
         String result = execute(serviceUrl, url, null, HttpGet.METHOD_NAME);
-        try {
-            return objectMapper.readValue(result, new TypeReference<List<T>>(){});
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            throw new OphClientException("parsinta-epaonnistui");
-        }
+        return parseList(result, clazz);
     }
 
     public <T> T get(String serviceUrl, String url, Class<T> clazz) {
@@ -54,6 +49,11 @@ public class OphClientHelper {
     public <T> T post(String serviceUrl, String url, Object content, Class<T> clazz) {
         String result = execute(serviceUrl, url, content, HttpPost.METHOD_NAME);
         return parseResult(result, clazz);
+    }
+
+    public <T> List<T> postAsList(String serviceUrl, String url, Object content, Class<T> clazz) {
+        String result = execute(serviceUrl, url, content, HttpPost.METHOD_NAME);
+        return parseList(result, clazz);
     }
 
     private String execute(String serviceUrl, String url, Object content, String httpMethod) {
@@ -86,6 +86,20 @@ public class OphClientHelper {
                 return null;
             }
             return objectMapper.readValue(result, clazz);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            throw new OphClientException("parsinta-epaonnistui");
+        }
+
+    }
+
+    private <T> List<T> parseList(String result, Class<T> clazz) {
+        try {
+            if(StringUtils.isEmpty(result)) {
+                return null;
+            }
+
+            return  objectMapper.readValue(result, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new OphClientException("parsinta-epaonnistui");
