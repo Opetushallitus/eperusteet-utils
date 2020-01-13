@@ -7,6 +7,7 @@ import fi.vm.sade.javautils.http.OphHttpClient;
 import fi.vm.sade.javautils.http.OphHttpEntity;
 import fi.vm.sade.javautils.http.OphHttpRequest;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -96,7 +97,7 @@ public class OphClientHelper {
     private <T> List<T> parseList(String result, Class<T> clazz) {
         try {
             if(StringUtils.isEmpty(result)) {
-                return null;
+                return Collections.emptyList();
             }
 
             return  objectMapper.readValue(result, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
