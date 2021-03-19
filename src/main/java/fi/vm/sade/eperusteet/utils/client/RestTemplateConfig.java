@@ -19,6 +19,7 @@ public class RestTemplateConfig {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Caller-Id", restClientFactory.getCallerId());
         headers.add("CSRF", "CachingRestClient");
+        headers.add("Cookie", "CSRF=CachingRestClient");
 
         return headers;
     }
