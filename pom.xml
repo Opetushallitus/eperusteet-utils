@@ -39,7 +39,7 @@
         <spring.security.version>4.2.4.RELEASE</spring.security.version>
         <aspectj.version>1.8.9</aspectj.version>
         <audit.logger.version>8.3.1-SNAPSHOT</audit.logger.version>
-        <javax.servet.version>3.0.1</javax.servet.version>
+        <javax.servet.version>3.1.0</javax.servet.version>
         <slf4j.version>1.7.21</slf4j.version>
         <sade.java-utils.version>0.5.0-SNAPSHOT</sade.java-utils.version>
         <commons-collections.version>3.2.2</commons-collections.version>
