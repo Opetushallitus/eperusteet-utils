@@ -1,4 +1,4 @@
-name: build and publish
+name: Eperusteet-backend-utils build
 on:
 #  release:
 #    types: [ created ]
