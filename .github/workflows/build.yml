@@ -20,11 +20,11 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Publish to Github
-        run: mvn deploy --batch-mode --projects .
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      #- name: Publish to Github
+      #  run: mvn deploy --batch-mode --projects .
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #
       - name: Publish to Artifactory
         env:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
