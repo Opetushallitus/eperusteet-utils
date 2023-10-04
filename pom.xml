@@ -12,10 +12,19 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
+			
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-release-plugin</artifactId>
+			  <version>3.0.1</version>
+			  <configuration>
+				<tagBase>ssh://git@github.com/opetushallitus/eperusteet-backend-utils/tags</tagBase>
+			  </configuration>
+			</plugin>
         </plugins>
     </build>
     <name>ePerusteet - Backend utils</name>
@@ -162,53 +171,31 @@
         </dependency>
 
     </dependencies>
-    <!-- <repositories> -->
-        <!-- <repository> -->
-            <!-- <id>oph-sade-artifactory-snapshots</id> -->
-            <!-- <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url> -->
-            <!-- <releases> -->
-                <!-- <enabled>false</enabled> -->
-            <!-- </releases> -->
-            <!-- <snapshots> -->
-                <!-- <enabled>true</enabled> -->
-            <!-- </snapshots> -->
-        <!-- </repository> -->
-        <!-- <repository> -->
-            <!-- <id>oph-sade-artifactory-releases</id> -->
-            <!-- <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-release-local</url> -->
-        <!-- </repository> -->
-        <!-- <repository> -->
-            <!-- <id>repository.jboss.org</id> -->
-            <!-- <name>JBoss Repository</name> -->
-            <!-- <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url> -->
-        <!-- </repository> -->
-        <!-- <repository> -->
-            <!-- <id>public</id> -->
-            <!-- <url>http://maven.nuxeo.org/nexus/content/repositories/public/</url> -->
-        <!-- </repository> -->
-    <!-- </repositories> -->
-    <!-- <distributionManagement> -->
-        <!-- <repository> -->
-            <!-- <id>github</id> -->
-            <!-- <name>oph-github-releases</name> -->
-            <!-- <url>https://maven.pkg.github.com/Opetushallitus/eperusteet-backend-utils</url> -->
-        <!-- </repository> -->
-    <!-- </distributionManagement> -->
 	
 	<distributionManagement>
-		<repository>
-			<id>oph-sade-artifactory</id>
-			<name>oph-sade-artifactory-releases</name>
-			<url>https://artifactory.opintopolku.fi/artifactory/oph-sade-release-local</url>
-		</repository>
-		<snapshotRepository>
-			<id>oph-sade-artifactory</id>
-			<name>oph-sade-artifactory-snapshots</name>
-			<url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>
-		</snapshotRepository>
-	</distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Opetushallitus/eperusteet-backend-utils</url>
+        </repository>
+    </distributionManagement>
 
 	<repositories>
+		<repository>
+            <releases>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Opetushallitus/eperusteet-backend-utils</url>
+        </repository>
 		<repository>
 			<id>oph-sade-artifactory-snapshots</id>
 			<url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>
@@ -230,4 +217,12 @@
 		    </snapshots>
 		</repository>
 	</repositories>
+	
+	<scm>
+		<url>https://github.com/opetushallitus/eperusteet-backend-utils</url>
+		<connection>scm:git:git://github.com/opetushallitus/eperusteet-backend-utils.git</connection>
+		<developerConnection>scm:git:git@github.com:opetushallitus/eperusteet-backend-utils.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	
 </project>
