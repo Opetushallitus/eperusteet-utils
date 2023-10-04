@@ -16,7 +16,7 @@ jobs:
           java-version: '11'
           distribution: 'corretto'
 
-      - name: Build with Maven
+      - name: Package
         run: mvn clean package
 
       - name: Publish snapshot
@@ -24,8 +24,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn deploy --batch-mode -DskipTests
-      - name: Deploy
+      - name: Release
         if: ${{ success() && github.ref_name == 'master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn release:clean release:prepare release:perform -DignoreSnapshots=true
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          mvn release:clean release:prepare release:perform -DignoreSnapshots=true
