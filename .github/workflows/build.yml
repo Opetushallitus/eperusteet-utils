@@ -5,7 +5,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest 
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
       - uses: actions/checkout@v3
@@ -19,13 +19,13 @@ jobs:
       - name: Package
         run: mvn clean package
 
-      - name: Publish snapshot
-        if: ${{ success() && github.ref_name != 'master' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn deploy --batch-mode -DskipTests
+      #- name: Publish snapshot
+      #  if: ${{ success() && github.ref_name != 'master' }}
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: mvn deploy --batch-mode -DskipTests
       - name: Release
-        if: ${{ success() && github.ref_name == 'master' }}
+        #if: ${{ success() && github.ref_name == 'master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

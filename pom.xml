@@ -222,7 +222,6 @@
 		<url>https://github.com/opetushallitus/eperusteet-backend-utils</url>
 		<connection>scm:git:https://github.com/opetushallitus/eperusteet-backend-utils.git</connection>
 		<developerConnection>scm:git:https://github.com/opetushallitus/eperusteet-backend-utils.git</developerConnection>
-		<tag>HEAD</tag>
 	</scm>
 	
 </project>
