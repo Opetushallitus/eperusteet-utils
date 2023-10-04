@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import sun.security.util.ObjectIdentifier;
 
 @Component
 public class CommonAuditer {
