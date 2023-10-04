@@ -28,4 +28,4 @@ jobs:
         if: ${{ success() && github.ref_name == 'master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn release:clean release:prepare release:perform -DallowTimestampedSnapshots=true
+        run: mvn release:clean release:prepare release:perform -DignoreSnapshots=true
