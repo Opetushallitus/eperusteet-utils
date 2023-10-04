@@ -19,11 +19,6 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      #- name: Publish to Github
-      #  run: mvn deploy --batch-mode --projects .
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #
       - name: Publish snapshot
         if: ${{ success() && github.ref_name != 'master' }}
         env:
@@ -33,4 +28,4 @@ jobs:
         if: ${{ success() && github.ref_name == 'master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn release:clean release:prepare release:perform
+        run: mvn release:clean release:prepare release:perform -DallowTimestampedSnapshots=true
