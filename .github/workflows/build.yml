@@ -32,5 +32,3 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           mvn release:clean release:prepare release:perform -DignoreSnapshots=true
-         
-# mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion} versions:commit
