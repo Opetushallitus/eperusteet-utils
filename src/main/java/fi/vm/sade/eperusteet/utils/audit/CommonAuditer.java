@@ -10,7 +10,7 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.MapUtils;
 import org.ietf.jgss.GSSException;
 import org.ietf.jgss.Oid;
