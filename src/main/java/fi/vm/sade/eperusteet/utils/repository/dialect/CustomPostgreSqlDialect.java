@@ -1,15 +1,13 @@
 package fi.vm.sade.eperusteet.utils.repository.dialect;
 
-import org.hibernate.dialect.PostgreSQL9Dialect;
+import org.hibernate.dialect.PostgreSQLDialect;
 
 import java.sql.Types;
 
 
-public class CustomPostgreSqlDialect extends PostgreSQL9Dialect {
+public class CustomPostgreSqlDialect extends PostgreSQLDialect {
     public CustomPostgreSqlDialect() {
         super();
-        registerColumnType(Types.JAVA_OBJECT, "jsonb");
+//        registerColumnType(Types.JAVA_OBJECT, "jsonb");
     }
-
-
 }

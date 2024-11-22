@@ -18,7 +18,7 @@ package fi.vm.sade.eperusteet.utils.revision.impl;
 
 import fi.vm.sade.eperusteet.utils.revision.RevisionMetaService;
 import java.util.Date;
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.exception.RevisionDoesNotExistException;
